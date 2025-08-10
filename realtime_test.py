@@ -6,9 +6,8 @@ import sys
 import json
 from vosk import Model, KaldiRecognizer
 
-# --- 설정값 수정 ---
 DEVICE_INDEX = 1
-# 마이크가 지원하는 샘플레이트로 설정 (48000 또는 44100)
+# 마이크가 지원하는 샘플레이트로 설정 (48000)
 SAMPLE_RATE = 48000
 
 q = queue.Queue()
@@ -40,7 +39,6 @@ try:
             # else:
             #     partial = json.loads(rec.PartialResult())
             #     if partial.get("partial"):
-            #         # 중간 결과는 너무 많이 출력되므로, 필요할 때만 주석을 해제하세요.
             #         # print("중간:", partial["partial"])
             #         pass
 except KeyboardInterrupt:
