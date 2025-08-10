@@ -15,7 +15,6 @@ SPEAKER_DEVICE="plughw:0,0"
 
 echo "Speaking directly via pipe: $TEXT_TO_SPEAK"
 
-# --- 이 부분이 이 모든 문제의 최종 해결책입니다 ---
 # 1. echo로 텍스트를 piper의 stdin으로 전달
 # 2. piper는 --output_file - 옵션으로 오디오 데이터를 자신의 stdout으로 출력
 # 3. aplay는 - 옵션으로 자신의 stdin으로 들어오는 오디오 데이터를 바로 재생
