@@ -1,0 +1,27 @@
+import sounddevice as sd
+import queue
+import sys
+import json
+from vosk import Model, KaldiRecognizer
+
+q = queue.Queue()
+
+def callback(indata, frames, time, status):
+    if status:
+        print(status, file=sys.stderr)
+    q.put(bytes(indata))
+
+model = Model("model")
+rec = KaldiRecognizer(model, 16000)
+
+with sd.RawInputStream(device=1, samplerate=16000, blocksize=8000, dtype='int16',
+                       channels=1, callback=callback): 
+    print("마이크가 켜졌습니다. 말해보세요.")
+    while True:
+        data = q.get()
+        if rec.AcceptWaveform(data):
+            res = json.loads(rec.Result())
+            print("결과:", res.get("text", ""))
+        else:
+            pass 
+
